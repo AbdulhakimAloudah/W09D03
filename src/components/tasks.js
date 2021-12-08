@@ -3,7 +3,7 @@ import axios from "axios";
 import { logout } from "./../reducers/login";
 import { getAllTasks, addNewTasks } from "./../reducers/tasks";
 import { useDispatch, useSelector } from "react-redux";
-
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 const Tasks = () => {
   const state = useSelector((state) => {
     return state;
@@ -21,14 +21,11 @@ const Tasks = () => {
 
   const getTasks = async () => {
     try {
-      const result = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/tasks`,
-        {
-          headers: {
-            Authorization: `Bearer ${state.signIn.token}`,
-          },
-        }
-      );
+      const result = await axios.get(`${BASE_URL}/`, {
+        headers: {
+          Authorization: `Bearer ${state.signIn.token}`,
+        },
+      });
 
       dispatch(getAllTasks(result.data));
     } catch (error) {
@@ -39,7 +36,7 @@ const Tasks = () => {
   const addTask = async () => {
     try {
       const result = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/task`,
+        `${BASE_URL}/create`,
         { name: "code" },
         {
           headers: {

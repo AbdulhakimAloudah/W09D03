@@ -3,6 +3,7 @@ import Tasks from "./components/tasks";
 import axios from "axios";
 import { login } from "./reducers/login";
 import { useDispatch, useSelector } from "react-redux";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const App = () => {
   const state = useSelector((state) => {
@@ -21,14 +22,11 @@ const App = () => {
 
   const register = async () => {
     try {
-      const result = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/signUp`,
-        {
-          email,
-          password,
-          role: "61a48733e2e0b47775d129eb",
-        }
-      );
+      const result = await axios.post(`${BASE_URL}/create`, {
+        email,
+        password,
+        role: "",
+      });
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -37,13 +35,10 @@ const App = () => {
 
   const log = async () => {
     try {
-      const result = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/login`,
-        {
-          email: logEmail,
-          password: logPassword,
-        }
-      );
+      const result = await axios.post(`${BASE_URL}/log`, {
+        email: logEmail,
+        password: logPassword,
+      });
 
       const data = {
         user: result.data.result,
