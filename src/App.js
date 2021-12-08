@@ -22,7 +22,7 @@ const App = () => {
 
   const register = async () => {
     try {
-      const result = await axios.post(`${BASE_URL}/create`, {
+      const result = await axios.post(`${BASE_URL}/user/create`, {
         email,
         password,
         role: "",
