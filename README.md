@@ -1,3 +1,55 @@
+
+User Stories :
+Signup
+Login
+Add 
+
+
+User profile :
+Signup
+Login
+Add 
+
+
+Path
+"/create" SignupPage
+"/log"  LoginPage
+
+
+Components
+tasks
+
+
+Models
+const roleSchema = new mongoose.Schema({
+  role: { type: String, required: true },
+  permissions: { type: Array, required: true },
+});
+
+
+const taskSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  isDeleted: { type: Boolean, default: false },
+});
+
+
+
+const userSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    validate: {
+      validator: validator.isEmail,
+      message: "{VALUE} is not a valid email",
+    },
+  },
+  password: { type: String, required: true },
+  role: { type: mongoose.Schema.Types.ObjectId, ref: "Role", required: true },
+});
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
